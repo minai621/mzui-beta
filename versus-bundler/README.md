@@ -44,3 +44,15 @@ main.js 파일의 사이즈가 207KB가 나왔다.
 bundle.js 파일의 사이즈가 162KB이다. bundle.css 파일이 분리돼 합치면 175KB로 webpack보다 32KB정도 사이즈가 작아졌다.
 
 단, minify 옵션들 true로 설정하여 코드 압축을 진행하였다.
+
+### rollup
+
+![alt text](./assets//rollup.png)
+
+rollup은 esm, cjs, iife 등으로 빌드할 수 있어 3가지 방식으로 빌드해보았다.
+결과적으로 173KB으로 모두 같은 용량을 갖고 있는 것을 확인할 수 있었다.
+
+> external: ["react", "react-dom"] external 옵션을 추가하면 외부 패키지를 빌드에서 제외할 수 있다.
+> 지금 빌드 결과엔 적용하지 않았음.
+
+단, rollup을 최적화하기 위해 rollup-plugin-terser 플러그인을 사용해서 minify 하였다.
