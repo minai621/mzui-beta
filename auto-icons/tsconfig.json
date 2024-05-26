@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "module": "ESNext",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "allowImportingTsExtensions": true,
+    "outDir": "./build/lib",
+    "emitDeclarationOnly": true,
+    "lib": ["es2017", "dom"],
+    "moduleResolution": "node",
+    "baseUrl": ".",
+    "declaration": true,
+    "strict": true,
+    "noImplicitAny": true
+  },
+  "ts-node": {
+    "esm": true
+  },
+  "include": ["src/**/*.ts", "scripts/**/*.ts"],
+  "exclude": ["icons"]
+}
