@@ -1,6 +1,10 @@
 import * as fs from "fs";
+import * as path from "path";
+import { fileURLToPath } from "url";
 
-// mapper.ts
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 type TokenMapper = {
   colors: string;
   typography: string;
@@ -75,8 +79,6 @@ const tokens: Tokens = {
   },
 };
 
-// Convert tokens to Korean-mapped version
-
 const convertTokensToKorean = (tokens: Tokens, mapper: TokenMapper): any => {
   const convertObject = (obj: any): any => {
     return Object.keys(obj).reduce((acc, key) => {
@@ -95,7 +97,6 @@ const convertTokensToKorean = (tokens: Tokens, mapper: TokenMapper): any => {
 
 const koreanTokens = convertTokensToKorean(tokens, tokenMapper);
 
-// Generate TypeScript file content
 const generateTsFileContent = (tokens: any): string => {
   const jsonString = JSON.stringify(tokens, null, 2);
   return `export const tokens = ${jsonString};`;
@@ -103,7 +104,17 @@ const generateTsFileContent = (tokens: any): string => {
 
 const tsFileContent = generateTsFileContent(koreanTokens);
 
-// Write to a new TypeScript file
-fs.writeFileSync("koreanTokens.ts", tsFileContent, "utf8");
+const outputFilePath = path.resolve(__dirname, "./koreanTokens.ts");
+fs.writeFileSync(outputFilePath, tsFileContent, "utf8");
 
-console.log("koreanTokens.ts 파일이 생성되었습니다.");
+console.log(`${outputFilePath} 파일이 생성되었습니다.`);
+
+const packageJsonPath = path.resolve(__dirname, "../package.json");
+const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, "utf8"));
+
+packageJson.exports = packageJson.exports || {};
+packageJson.exports["."] = "./src/koreanTokens.ts";
+
+fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2), "utf8");
+
+console.log("package.json 파일이 업데이트되었습니다.");
