@@ -72,6 +72,9 @@ importers:
       react-dom:
         specifier: ^18.2.0
         version: 18.2.0(react@18.2.0)
+      token-generate:
+        specifier: workspace:*
+        version: link:../../packages/token-generate
     devDependencies:
       '@next/eslint-plugin-next':
         specifier: ^14.1.1
@@ -97,9 +100,6 @@ importers:
       eslint:
         specifier: ^8.57.0
         version: 8.57.0
-      token-generate:
-        specifier: workspace:*
-        version: link:../../packages/token-generate
       typescript:
         specifier: ^5.3.3
         version: 5.3.3
